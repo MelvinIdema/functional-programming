@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     /** Styling from: https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
+        table {
+            border-collapse: collapse;
+            margin: 25px auto;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .visualisation {
+            height: 25px;
+            width: 25px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<table id="eyeColorTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Oogkleur</th>
+        <th>Visualisatie</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script src="main.js"></script>
+</body>
+</html>
