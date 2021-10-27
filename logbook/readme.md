@@ -76,5 +76,6 @@ documenteren van je project en het opstellen van een wiki. Ook
 hebben we heel kort gehad over Functional Programming. 
 Programmeren waarbij alles een functie is zonder side-effects. 
 
-Hierna ben ik begonnen met het documenteren van wat ik tot nu toe heb.
-Met als begin dit logboek.
+Hierna ben ik begonnen met het documenteren van wat ik tot nu 
+toe heb. Met als begin dit logboek. Vervolgens ben ik verder 
+gegaan met de wiki.
