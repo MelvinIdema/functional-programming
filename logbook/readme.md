@@ -146,6 +146,7 @@ een random biertje zien.) uit te werken in HTML en CSS. Zo simpel
 mogelijk, maar wel een beetje mooi.
 
 Dit is het eindresultaat vandaag:
+
 ![eind resultaat vandaag](randombeerpage.png)
 
 Na de standup ben ik nog even doorgegaan. Waarbij 
@@ -161,6 +162,7 @@ Verder wil ik de "Give me a random beer" naar links laten schuiven zodra je
 op "please" klikt. En dat er dan aan de rechterkant een biertje verschijnt.
 Hiervoor moet ik een state opslaan, maar een state is in de wortel al gewoon
 een niet functioneel begrip. Tenzij je de state direct doorgeeft in de chain.
+
 ![eind resultaat vandaag](slidetoleft.gif)
 
 Aangezien het aanpassen van de DOM ook niet past in Functional Programming,
