@@ -6,57 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            margin: 25px auto;
-            font-size: 0.9em;
-            font-family: sans-serif;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        }
-
-        table thead tr {
-            background-color: #009879;
-            color: #ffffff;
-            text-align: left;
-        }
-
-        table th,
-        table td {
-            padding: 12px 15px;
-        }
-
-        table tbody tr {
-            border-bottom: 1px solid #dddddd;
-        }
-
-        table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-
-        table tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Oogkleur</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>#010101</td>
-    </tr>
-    </tbody>
-</table>
-
-<script src="dist/main.js"></script>
+<header class="start-header" data-started="false">
+    <h1 class="gradient" data-text="Give me a random beer!">Give me a random beer!</h1>
+    <button id="giveMeABeerPlease" class="btn btn-start">please</button>
+</header>
+<script src="src/main.js" type="module"></script>
 </body>
 </html>

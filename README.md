@@ -6,3 +6,6 @@ In order to challenge myself and to make the cleaned data tangible I decided to 
 
 ## Logbook
 To see what I've done per day. View the [logbook](logbook/readme.md)
+
+## Week 1
+Week 1 was a training week. It was mostly learning about functional programming and applying it to a given dataset.
