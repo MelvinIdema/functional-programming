@@ -189,3 +189,5 @@ de functie staat tegenover de Functional Programming principles:
  */
 const getYearOnly = date => typeof date === "string" ? date.match(/\b(16|17|18|19|20)\d{2}\b/) : date;
 ```
+
+Nu moet ik nog de data laten zien.

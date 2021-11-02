@@ -13,7 +13,8 @@ body {
 }
 
 .start-header.to-the-left {
-    left: 20%;
+    left: 32px; top: 50%;
+    transform: translateY(-50%) translateX(0) rotate(-5deg);
     transition: all 300ms ease-in-out;
 }
 
