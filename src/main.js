@@ -1,13 +1,9 @@
+import api from "./config/api.js";
+
 import numToPositive from './helpers/numToPositive.js';
 import grabYear from './helpers/grabYear.js';
-import describePh from "./helpers/describePh.js";
+import describeThePh from "./helpers/describePh.js";
 
-const apiUrl = 'https://api.punkapi.com'
-const apiVersion = '/v2';
-const apiRandomBeer = `${apiUrl}${apiVersion}/beers/random`;
-const api = {
-    getRandomBeer: () => fetch(apiRandomBeer).then(res => res.json())
-}
 const $ = selector => document.querySelector(selector);
 
 /**
@@ -20,20 +16,21 @@ const $ = selector => document.querySelector(selector);
 const yearToText = year => `First brewed ${numToPositive((parseInt(grabYear(year))) - new Date().getFullYear())} years ago`;
 
 /**
- * Not a functional function. Has side effects:
- * - Uses outside functions
+ *
+ * Transforms certain properties in the beer object.
+ *
+ * Uses dependency injection to avoid any side effects.
+ *
+ * @param describePh
+ * @param transformFirstBrewed
  * @param dirtyBeer
- * @returns {{image: (string|string), name: (string|string), description: (*|string), isSour: (string|string), brewedHowLongAgo: (string|string)}}
+ * @returns {*&{ph: string, firstBrewed: string}}
  */
-function transformBeer(dirtyBeer) {
-    return {
-        name: dirtyBeer.name ?? dirtyBeer.title ?? "Unknown",
-        description: dirtyBeer.description ?? dirtyBeer.tagline ?? "Unknown",
-        isSour: dirtyBeer.ph !== undefined ? describePh(dirtyBeer.ph) : "Unknown",
-        brewedHowLongAgo: dirtyBeer.first_brewed !== undefined ? yearToText(dirtyBeer.first_brewed) : "Unknown",
-        image: dirtyBeer.image_url !== undefined ? `${dirtyBeer.image_url}` : "Unknown"
-    }
-}
+const transformBeer = ({describePh, transformFirstBrewed}, dirtyBeer) => ({
+    ...dirtyBeer,
+    ph: describePh(dirtyBeer.ph),
+    firstBrewed: transformFirstBrewed(dirtyBeer.firstBrewed),
+});
 
 function renderBeer(beer) {
     const thumb = $("#beerThumb");
@@ -45,8 +42,8 @@ function renderBeer(beer) {
     thumb.src = beer.image;
     title.innerText = beer.name;
     desc.innerText = beer.description;
-    sour.innerText = beer.isSour;
-    brewed.innerText = beer.brewedHowLongAgo;
+    sour.innerText = beer.ph;
+    brewed.innerText = beer.firstBrewed;
 }
 
 /**
@@ -55,17 +52,17 @@ function renderBeer(beer) {
  * - Makes changes to DOM Element
  * - Accesses API Object and outside functions.
  */
-function giveMeARandomBeer() {
+function giveMeARandomBeer({describePh, transformFirstBrewed}, dirtyBeer) {
     const startHeader = $(".start-header");
     const beerSection = $(".beer-section");
-    if(startHeader.dataset.started === "false") {
+    if (startHeader.dataset.started === "false") {
         startHeader.dataset.started = "true";
         startHeader.classList.add("to-the-left");
         beerSection.classList.add("active");
     }
 
     api.getRandomBeer()
-        .then(randomBeer => transformBeer(randomBeer[0]))
+        .then(randomBeer => transformBeer({describePh: describeThePh, transformFirstBrewed: yearToText}, randomBeer))
         .then(transformedBeer => renderBeer(transformedBeer))
         .catch(err => console.error(err));
 }
