@@ -14,6 +14,7 @@ body {
     top: calc(50% - 32px); left: 50%;
     transform-origin: top left;
     transform: rotate(-5deg) translate(-50%, -50%);
+    z-index: 2;
 }
 
 .start-header.to-the-left {
@@ -80,7 +81,47 @@ body {
 .grid {
     display: grid;
     height: 100%; width: 100%;
-    grid-template-columns: calc(var(--start-header-width) + 96px) calc(100% - var(--start-header-width));
+    grid-template-columns: calc(var(--start-header-width) + 96px) calc(100% - (var(--start-header-width) + 96px));
+}
+
+.beer-section {
+    display: grid;
+    position: relative;
+    transform: translateY(-50%);
+    top: 50%;
+    justify-content: center;
+    max-width: 50%;
+    width: fit-content;
+    margin: 0 auto;
+    background: white;
+    color: black;
+    padding: 36px 36px;
+    border-radius: 32px;
+    opacity: 0;
+}
+
+.beer-section.active {
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;
+}
+
+.beer-thumbnail {
+    display: block;
+    height: 50vh;
+    margin: 0 auto;
+}
+
+.beer-section h1 {
+    margin-bottom: 0;
+}
+
+.beer-section p {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.beer-section ul {
+    margin-top: 0;
 }
 
 @keyframes breathing {

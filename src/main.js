@@ -4,6 +4,7 @@ const apiRandomBeer = `${apiUrl}${apiVersion}/beers/random`;
 const api = {
     getRandomBeer: () => fetch(apiRandomBeer).then(res => res.json())
 }
+const $ = selector => document.querySelector(selector);
 
 /**
  * Functional Function - Grabs the year from a string.
@@ -34,7 +35,7 @@ const phToName = ph => ph > 4.2 ? "not so sour" : "sour";
  * @param year
  * @returns {string}
  */
-const yearToText = year => `${toPositive((parseInt(getYearOnly(year))) - new Date().getFullYear())} years ago`;
+const yearToText = year => `First brewed ${toPositive((parseInt(getYearOnly(year))) - new Date().getFullYear())} years ago`;
 
 /**
  * Not a functional function. Has side effects:
@@ -52,6 +53,20 @@ function transformBeer(dirtyBeer) {
     }
 }
 
+function renderBeer(beer) {
+    const thumb = $("#beerThumb");
+    const title = $("#beerTitle");
+    const desc = $("#beerDesc");
+    const sour = $("#beerSour");
+    const brewed = $("#beerBrewed");
+
+    thumb.src = beer.image;
+    title.innerText = beer.name;
+    desc.innerText = beer.description;
+    sour.innerText = beer.isSour;
+    brewed.innerText = beer.brewedHowLongAgo;
+}
+
 /**
  * Not a functional function. Has side effects:
  * - Accesses DOM Element
@@ -59,15 +74,17 @@ function transformBeer(dirtyBeer) {
  * - Accesses API Object and outside functions.
  */
 function giveMeARandomBeer() {
-    const startHeader = document.querySelector(".start-header");
+    const startHeader = $(".start-header");
+    const beerSection = $(".beer-section");
     if(startHeader.dataset.started === "false") {
         startHeader.dataset.started = "true";
         startHeader.classList.add("to-the-left");
+        beerSection.classList.add("active");
     }
 
     api.getRandomBeer()
         .then(randomBeer => transformBeer(randomBeer[0]))
-        .then(transformedBeer => console.log(transformedBeer))
+        .then(transformedBeer => renderBeer(transformedBeer))
         .catch(err => console.error(err));
 }
 
