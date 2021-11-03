@@ -1,4 +1,5 @@
 import numToPositive from './helpers/numToPositive.js';
+import grabYear from './helpers/grabYear.js';
 
 const apiUrl = 'https://api.punkapi.com'
 const apiVersion = '/v2';
@@ -7,14 +8,6 @@ const api = {
     getRandomBeer: () => fetch(apiRandomBeer).then(res => res.json())
 }
 const $ = selector => document.querySelector(selector);
-
-/**
- * Functional Function - Grabs the year from a string.
- * Definitely not fool proof. Years before 1600 and after 2099 are not "valid" according to this REGEX.
- * @param date
- * @returns {RegExpMatchArray|*}
- */
-const getYearOnly = date => typeof date === "string" ? date.match(/\b(16|17|18|19|20)\d{2}\b/) : date;
 
 /**
  * Functional Function - Returns a string based on a given float (PH).
@@ -30,7 +23,7 @@ const phToName = ph => ph > 4.2 ? "not so sour" : "sour";
  * @param year
  * @returns {string}
  */
-const yearToText = year => `First brewed ${numToPositive((parseInt(getYearOnly(year))) - new Date().getFullYear())} years ago`;
+const yearToText = year => `First brewed ${numToPositive((parseInt(grabYear(year))) - new Date().getFullYear())} years ago`;
 
 /**
  * Not a functional function. Has side effects:
