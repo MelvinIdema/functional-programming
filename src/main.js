@@ -1,3 +1,5 @@
+import numToPositive from './helpers/numToPositive.js';
+
 const apiUrl = 'https://api.punkapi.com'
 const apiVersion = '/v2';
 const apiRandomBeer = `${apiUrl}${apiVersion}/beers/random`;
@@ -15,13 +17,6 @@ const $ = selector => document.querySelector(selector);
 const getYearOnly = date => typeof date === "string" ? date.match(/\b(16|17|18|19|20)\d{2}\b/) : date;
 
 /**
- * Functional Function - Makes a number positive if not positive.
- * @param num
- * @returns {number|*}
- */
-const toPositive = num => num < 0 ? num * -1 : num;
-
-/**
  * Functional Function - Returns a string based on a given float (PH).
  * @param ph
  * @returns {string}
@@ -35,7 +30,7 @@ const phToName = ph => ph > 4.2 ? "not so sour" : "sour";
  * @param year
  * @returns {string}
  */
-const yearToText = year => `First brewed ${toPositive((parseInt(getYearOnly(year))) - new Date().getFullYear())} years ago`;
+const yearToText = year => `First brewed ${numToPositive((parseInt(getYearOnly(year))) - new Date().getFullYear())} years ago`;
 
 /**
  * Not a functional function. Has side effects:
