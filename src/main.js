@@ -1,5 +1,6 @@
 import numToPositive from './helpers/numToPositive.js';
 import grabYear from './helpers/grabYear.js';
+import describePh from "./helpers/describePh.js";
 
 const apiUrl = 'https://api.punkapi.com'
 const apiVersion = '/v2';
@@ -8,13 +9,6 @@ const api = {
     getRandomBeer: () => fetch(apiRandomBeer).then(res => res.json())
 }
 const $ = selector => document.querySelector(selector);
-
-/**
- * Functional Function - Returns a string based on a given float (PH).
- * @param ph
- * @returns {string}
- */
-const phToName = ph => ph > 4.2 ? "not so sour" : "sour";
 
 /**
  * Not a functional Function. Has side effects:
@@ -35,7 +29,7 @@ function transformBeer(dirtyBeer) {
     return {
         name: dirtyBeer.name ?? dirtyBeer.title ?? "Unknown",
         description: dirtyBeer.description ?? dirtyBeer.tagline ?? "Unknown",
-        isSour: dirtyBeer.ph !== undefined ? phToName(dirtyBeer.ph) : "Unknown",
+        isSour: dirtyBeer.ph !== undefined ? describePh(dirtyBeer.ph) : "Unknown",
         brewedHowLongAgo: dirtyBeer.first_brewed !== undefined ? yearToText(dirtyBeer.first_brewed) : "Unknown",
         image: dirtyBeer.image_url !== undefined ? `${dirtyBeer.image_url}` : "Unknown"
     }
