@@ -206,3 +206,82 @@ Verder heb ik vandaag wat visualisatie dingen gedaan en een transition
 toegevoegd. 
 
 Ik heb ook de to-do list van gisteren als issues in GitHub gezet.
+
+Daarna heb ik alle opzichzelfstaande functies omgezet naar modules,
+de API als config / methods object omgezet. En de transformBeer functie
+Functional gemaakt. Door de spread operator te gebruiken (hierdoor
+wordt er een nieuw object gemaakt.) En dependency injection. Waardoor
+je de functies die binnenin gebruikt worden ook moet meegeven als
+parameter. Dit was ook een uitgekozen moment om de functie om te zetten
+naar arrow functie aangezien hij alleen iets returned. 
+
+```diff
+-Function transformBeer(dirtyBeer) {
+-    return {
+-        name: dirtyBeer.name ?? dirtyBeer.title ?? "Unknown",
+-        description: dirtyBeer.description ?? dirtyBeer.tagline ?? "Unknown",
+-        isSour: dirtyBeer.ph !== undefined ? describePh(dirtyBeer.ph) : "Unknown",
+-        brewedHowLongAgo: dirtyBeer.first_brewed !== undefined ? yearToText(dirtyBeer.first_brewed) : "Unknown",
+-        image: dirtyBeer.image_url !== undefined ? `${dirtyBeer.image_url}` : "Unknown"
+-    }
+-}
+
++const transformBeer = ({describePh, transformFirstBrewed}, dirtyBeer) => ({
++    ...dirtyBeer,
++    ph: describePh(dirtyBeer.ph),
++    firstBrewed: transformFirstBrewed(dirtyBeer.firstBrewed),
++});
+```
+
+Verder kwam ik in een helder moment er achter dat ik echt veel te
+moeilijk gedaan heb in de yearToText functie:
+```js
+const yearToText = year => `First brewed ${numToPositive((parseInt(grabYear(year))) - new Date().getFullYear())} years ago`;
+```
+Hier heb ik een numToPositive functie voor geschreven, die het negatieve
+resultaat van yearInThePast - currentYear omzet naar positief. Maar
+je kunt natuurlijk gewoon currentYear - yearInThePast doen. Dan heb je
+die functie helemaal niet nodig.
+
+```
+2013 - 2021 = -8;
+2021 - 2031 = 8;
+```
+
+Nu is de functie iets simpeler, maar nog steeds niet functioneel. Er wordt nog
+een functie van buitenaf aangeroepen en een Date object gebruikt. Eigenlijk
+ben ik sowieso niet tevreden met m'n code. Een echte "functional programmer" zou hier
+naar kijken en het niet herkennen als functional. 
+
+Vorig jaar had ik dit artikel gevonden:
+https://codereview.stackexchange.com/questions/241501/is-the-javascript-code-ive-provided-following-functional-programming-best-pract/241523?noredirect=1#comment474037_241523
+En zojuist heb ik dit artikel er ook bij gevonden:
+https://www.telerik.com/blogs/functional-programming-javascript
+Met als qoute:
+> "Pure functions are simple and reusable building blocks inside an application."
+
+En dat vind ik een mooie leidraad om m'n functies te refactoren. 
+Simpel en herbruikbaar. Helaas zijn API calls en DOM manipulation nou eenmaal 
+niet functional aangezien het de no side-effect en immutability principles schend.
+
+Deze week heb ik een aantal dingen geleerd en dat wil ik gaan toepassen op een
+nieuwe versie van de app:
+1. Zet de logica van je app bovenaan en de functies onderaan.
+2. Functional Programming Principles
+   1. Functies horen **puur** te zijn. Zelfde input = Zelfde output
+      1. Accessing system state outside of the function
+      2. Mutating objects passed as arguments
+      3. Making a HTTP call
+      4. Obtaining user input
+      5. Querying the DOM
+   2. Functies horen klein, simpel en herbruikbaar te zijn.
+   3. Functies horen geen side effects te hebben
+   4. Functies horen niets te muteren.
+   5. In Functional Programming gebruik je geen loops, ifs of sequences.
+    declaratief programmeren i.p.v imperatief
+
+Eigenlijk hoe meer ik lees en experimenteer met Functional Programming in
+Javascript, hoe meer ik er achter kom dat het echte verlangen ligt bij
+het losjes volgen van de principles, testbaarheid en voornamelijk 
+declaratief programmeren. Beschrijvend programmeren, je programma moet 
+lezen als een boek. In plaats van een set instructies voor de computer.
