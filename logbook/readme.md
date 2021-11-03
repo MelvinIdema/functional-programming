@@ -195,3 +195,14 @@ Dit wil ik nog bereiken:
 * Code opbreken in modules naar voorbeeld van Joost Faber.
 * Wiki uitbreidden en aanpassen.
 * Kijken of niet functional functies nog functional gemaakt kunnen worden.
+
+## Dag 8
+Vandaag de dag begonnen met een hele korte presentatie over de rubric en
+een verzoek om elkaars werk te peer-reviewen aan de hand van issues op 
+GitHub. Ik heb Tom van den Berg gevraagd om mijn werk te peer-reviewen.
+En heb zelf die van Davey Zaal en van Tom gepeer-reviewed. 
+
+Verder heb ik vandaag wat visualisatie dingen gedaan en een transition
+toegevoegd. 
+
+Ik heb ook de to-do list van gisteren als issues in GitHub gezet.
