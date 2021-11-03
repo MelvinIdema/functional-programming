@@ -1,11 +1,15 @@
+:root {
+    --start-header-width: 390px;
+}
 body {
     margin: 0;
     background: #0e1111;
     font-family: 'Lato', sans-serif;
+    height: 100vh;
 }
 
 .start-header {
-    max-width: 390px;
+    max-width: var(--start-header-width);
     position: absolute;
     top: calc(50% - 32px); left: 50%;
     transform-origin: top left;
@@ -71,6 +75,12 @@ body {
     background: linear-gradient(to right, #F5B648, #E7DE3F);
     color: #fafafa;
     transition: none;
+}
+
+.grid {
+    display: grid;
+    height: 100%; width: 100%;
+    grid-template-columns: calc(var(--start-header-width) + 96px) calc(100% - var(--start-header-width));
 }
 
 @keyframes breathing {
